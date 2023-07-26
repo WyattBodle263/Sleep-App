@@ -162,29 +162,41 @@ class _LogPageState extends State<LogPage> {
                         selectedSleepQuality,
                         selectedDate,
                       );
+                      String deviceName = " ";
 
-                      //Add log to database
+                      // Get users device name and update the deviceName variable
+                      DatabaseReference deviceIdRef = FirebaseDatabase.instance.ref().child("users").child(user.uid);
+
+                      // Convert the Stream to a Future and await the first value
+                      final dataSnapshot = await deviceIdRef.onValue.first;
+                      final userData = dataSnapshot.snapshot.value as Map<dynamic, dynamic>?;
+                      if (userData != null && userData['deviceName'] != null) {
+                        deviceName = userData['deviceName'] as String;
+                        deviceName = deviceName.replaceAll("’", "'");
+                        print("Device Name = $deviceName");
+                      }
+
+                      // Add log to the database
                       final logPath = '${user.uid}/${DateFormat('yyyy-MM-dd').format(selectedDate)}';
-                      final logReference = FirebaseDatabase.instance
-                          .ref()
-                          .child('logs')
-                          .child(logPath);
-
+                      final logReference = FirebaseDatabase.instance.ref().child('logs').child(logPath);
                       await logReference.set(newLog.toMap());
-                      //Change color in day
-                      final colorPath = 'devices/Wyatt\'s Pi/${DateFormat('yyyy-MM-dd').format(selectedDate)}';
+
+                      // Change color in the day
+                      final colorPath = 'devices/$deviceName/${DateFormat('yyyy-MM-dd').format(selectedDate)}';
                       final colorReference = FirebaseDatabase.instance.ref().child(colorPath);
                       String color = "grey";
-                      //Set the color for the database ref
-                      if(selectedSleepQuality == SleepQuality.good){
+
+                      // Set the color for the database reference based on selectedSleepQuality
+                      if (selectedSleepQuality == SleepQuality.good) {
                         color = "green";
-                      }else if(selectedSleepQuality == SleepQuality.average){
+                      } else if (selectedSleepQuality == SleepQuality.average) {
                         color = "yellow";
-                      }else if(selectedSleepQuality == SleepQuality.poor){
+                      } else if (selectedSleepQuality == SleepQuality.poor) {
                         color = "red";
-                      }else{
+                      } else {
                         color = "grey";
                       }
+
                       Map<String, dynamic> updateData = {
                         'color': color,
                       };

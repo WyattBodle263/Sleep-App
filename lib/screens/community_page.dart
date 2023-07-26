@@ -14,6 +14,7 @@ class CommunityPage extends StatefulWidget {
 }
 
 class _CommunityPageState extends State<CommunityPage> {
+  //Create instances of firebase objects
   late FirebaseAuth _auth;
   late DatabaseReference _userRef;
   late DatabaseReference _postsRef;
@@ -23,6 +24,7 @@ class _CommunityPageState extends State<CommunityPage> {
   @override
   void initState() {
     super.initState();
+    //Initialize all of the variables
     _auth = FirebaseAuth.instance;
     _userRef = FirebaseDatabase.instance.reference().child('users').child(_auth.currentUser!.uid);
     _postsRef = FirebaseDatabase.instance.reference().child('posts');
@@ -30,6 +32,7 @@ class _CommunityPageState extends State<CommunityPage> {
     _loadPosts();
   }
 
+  //Function to load the posts to the community page
   Future<void> _loadPosts() async {
     final DatabaseEvent event = await _postsRef.orderByChild('timestamp').once();
     final DataSnapshot snapshot = event.snapshot;
@@ -56,12 +59,14 @@ class _CommunityPageState extends State<CommunityPage> {
     }
   }
 
+  //Dispose of post controller
   @override
   void dispose() {
     _postController.dispose();
     super.dispose();
   }
 
+  //Functionm to submit a post to firebase
   Future<void> _submitPost() async {
     final profanityFilter = ProfanityFilter(); // Create an instance of the profanity filter
 
@@ -101,6 +106,7 @@ class _CommunityPageState extends State<CommunityPage> {
     }
   }
 
+  //Function to like a post
   Future<void> _likePost(String postKey) async {
     final DatabaseReference postRef = _postsRef.child(postKey);
     final DataSnapshot postSnapshot = await postRef.get();
