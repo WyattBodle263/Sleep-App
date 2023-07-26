@@ -138,7 +138,7 @@ class FirebaseAuthStateState extends State<FirebaseAuthState> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
         leading: widget.title == 'Login'
             ? null
