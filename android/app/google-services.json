@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "7284030244",
+    "firebase_url": "https://sleep-tracker-13aa5-default-rtdb.firebaseio.com",
+    "project_id": "sleep-tracker-13aa5",
+    "storage_bucket": "sleep-tracker-13aa5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7284030244:android:b597b6778c0e67c847d1b1",
+        "android_client_info": {
+          "package_name": "com.example.theresa_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7284030244-11viba72uriorcj3bvh1763rnnnnahmc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP1oLhUEPxklEHVv0NxcRuHZrQ8tEH1CY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "7284030244-11viba72uriorcj3bvh1763rnnnnahmc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
