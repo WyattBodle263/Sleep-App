@@ -50,15 +50,15 @@
 		<key>UIStatusBarHidden</key>
 		<false/>
 		<key>CFBundleURLTypes</key>
-        <array>
-            <dict>
-                <key>CFBundleTypeRole</key>
-                <string>Editor</string>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>com.googleusercontent.apps.7284030244-9git4v6kq4qv1riksjddicmef62n2luh</string>
-                </array>
-            </dict>
-        </array>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>com.googleusercontent.apps.7284030244-9git4v6kq4qv1riksjddicmef62n2luh</string>
+				</array>
+			</dict>
+		</array>
 	</dict>
 </plist>

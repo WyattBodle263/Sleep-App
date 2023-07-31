@@ -35,6 +35,20 @@ class MyAppState extends State<MyApp> {
 
 AuthService authService = AuthService();
 
+  final customColorScheme = const ColorScheme(
+    primary: Color(0xFFCFB1B0),
+    secondary: Color(0xFFCFB1B0),
+    surface: Colors.white,
+    background: Colors.white,
+    error: Colors.red,
+    onPrimary: Colors.white,
+    onSecondary: Colors.white,
+    onSurface: Colors.black,
+    onBackground: Colors.black,
+    onError: Colors.white,
+    brightness: Brightness.light,
+  );
+
 
   //Override the initial state
 void initState(){
@@ -64,7 +78,7 @@ void initState(){
     return MaterialApp(
       title: '',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
+        colorScheme: customColorScheme,
         useMaterial3: true,
       ),
       //Home is the page that will be called first

@@ -78,35 +78,41 @@ class CustomBottomNavigationBar extends StatelessWidget {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined
+              Icons.home_outlined,
+              size: 30,
             ),
             label: '',
             backgroundColor: Colors.transparent,
           ),
           BottomNavigationBarItem(
             icon: Icon(
-                Icons.lightbulb_outline
+                Icons.lightbulb_outline,
+              size: 30,
+
             ),
             label: '',
             backgroundColor: Colors.transparent,
           ),
           BottomNavigationBarItem(
             icon: Icon(
-                Icons.ballot_outlined
+                Icons.ballot_outlined,
+              size: 30,
             ),
             label: '',
             backgroundColor: Colors.transparent,
           ),
           BottomNavigationBarItem(
             icon: Icon(
-                Icons.people_outline_outlined
+                Icons.people_outline_outlined,
+              size: 30,
             ),
             label: '',
             backgroundColor: Colors.transparent,
           ),
           BottomNavigationBarItem(
             icon: Icon(
-                Icons.settings_outlined
+                Icons.settings_outlined,
+              size: 30,
             ),
             label: '',
             backgroundColor: Colors.transparent,

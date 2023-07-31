@@ -33,7 +33,7 @@ class _SuggestionsPageState extends State<SuggestionsPage> {
       if (ambientLight > 200.0) {
         sleepSuggestions.add('Ambient light levels too high for ideal sleep. Consider removing any light sources.');
       }
-      print(temp);
+
       if (temp <= 60.0 || temp >= 75.0) {
         if(temp <= 60.0){
           sleepSuggestions.add('Temperature levels too low for ideal sleep. Consider raising the temperature.');

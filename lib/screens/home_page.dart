@@ -204,15 +204,18 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // This function is used to handle the selected date from a calendar and calculate averages of motion data.
   void selectDate(DateTime selectedDay) {
     setState(() {
+      // Get the selected day from the calendar and convert it to text format for the UI
       _selectedDay = selectedDay;
       formattedDate = DateFormat('yyyy-MM-dd').format(selectedDay);
-      print(formattedDate);
       thisDate = formattedDate!;
 
+      // Find the night that matches the selected date from the list of nights
       Night? selectedNight = nightList.firstWhere(
             (night) => night.date == formattedDate,
+        // If no night is found for the selected date, initialize with default values
         orElse: () => Night(
           sleepTimeSeconds: 0,
           totalTimeSeconds: 0,
@@ -223,13 +226,17 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
+      // Reset all values for a new calculation
       resetValues();
 
       if (selectedNight != null) {
+        // Calculate averages for each motion data type in the selected night
         for (var motion in selectedNight.motion) {
           List<Motion> motionList = selectedNight.motion;
           int count = 0;
           listTimes.clear();
+
+          // Loop through each motion data and calculate the sum of each attribute (humidity, temperature, sound, light, ambientLight)
           for (var data in motionList) {
             count++;
             humidity += data.humidity;
@@ -239,12 +246,15 @@ class _HomePageState extends State<HomePage> {
             ambientLight += data.ambientLight;
             listTimes.add(data.timeTaken);
           }
+
+          // Calculate averages by dividing the accumulated values by the count of motion data
           humidity /= count;
           temp /= count;
           sound /= count;
           light /= count;
           ambientLight /= count;
 
+          // Convert averages to one decimal point precision
           humidity = double.parse(humidity.toStringAsFixed(1));
           temp = double.parse(temp.toStringAsFixed(1));
           sound = double.parse(sound.toStringAsFixed(1));
@@ -252,6 +262,7 @@ class _HomePageState extends State<HomePage> {
           ambientLight = double.parse(ambientLight.toStringAsFixed(1));
         }
       } else {
+        // If no night is found, set all values to zero
         totalTime = "0 minutes 0 Seconds";
         activeTime = "0 minutes 0 Seconds";
         sleepTime = "0 minutes 0 Seconds";
@@ -450,12 +461,12 @@ class _HomePageState extends State<HomePage> {
               calendarStyle: const CalendarStyle(
                 // Today's style
                 todayDecoration: BoxDecoration(
-                  color: Colors.pink,
+                  color: Color(0xFF7C6468),
                   shape: BoxShape.circle,
                 ),
                 // Selected day style
                 selectedDecoration: BoxDecoration(
-                  color: Colors.pinkAccent,
+                  color: Color(0xFFCFB1B0),
                   shape: BoxShape.circle,
                 ),
 

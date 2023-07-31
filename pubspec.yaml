@@ -74,11 +74,6 @@ flutter:
   assets:
      - assets/splash.png
      - assets/navbar.png
-     - assets/home_icon.png
-     - assets/suggestion_icon.png
-     - assets/log_icon.png
-     - assets/community_icon.png
-     - assets/profile_icon.png
      - assets/Google_criculo_logo.jpeg
      - assets/icon.png
      - assets/profile_pictures/avatar1.png

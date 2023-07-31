@@ -53,10 +53,17 @@ class _LaunchPageState extends State<LaunchPage> {
                 },
                 //Change style of button here
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFFE3BCBB),
                   minimumSize: const Size(250, 50),
                 ),
                 //Change title on top button here
-                child: const Text('Login'),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(
+                    color: Colors.white, // Setting the text color of the button
+                    fontSize: 18,
+                  ),
+                ),
             ),
             const SizedBox(height: 40),
           ElevatedButton(
@@ -70,10 +77,17 @@ class _LaunchPageState extends State<LaunchPage> {
             },
             //Change style of button here
             style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFFE3BCBB),
               minimumSize: const Size(250, 50),
             ),
             //Change title on top button here
-            child: const Text('Sign Up'),
+            child: const Text(
+              'Sign Up',
+              style: TextStyle(
+                color: Colors.white, // Setting the text color of the button
+                fontSize: 18,
+              ),
+            ),
           ),
           ],
           ),

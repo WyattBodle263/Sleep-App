@@ -188,9 +188,16 @@ class FirebaseAuthStateState extends State<FirebaseAuthState> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFFE3BCBB),
                           minimumSize: const Size(250, 50),
                         ),
-                        child: Text(widget.title),
+                        child: Text(
+                          widget.title,
+                          style: TextStyle(
+                            color: Colors.white, // Setting the text color of the button
+                            fontSize: 18,
+                          ),
+                        ),
                       ),
                     ],
                   ),
