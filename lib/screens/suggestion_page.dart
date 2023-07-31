@@ -13,51 +13,64 @@ class SuggestionsPage extends StatefulWidget {
 class _SuggestionsPageState extends State<SuggestionsPage> {
   List<String> sleepSuggestions = [];
 
+  // Function to check sleep suggestions based on various environmental factors
   void checkSleepSuggestions() {
-    sleepSuggestions.clear(); // Clear the sleepSuggestions list
+    // Clear the sleepSuggestions list before adding new suggestions
+    sleepSuggestions.clear();
 
-    print(temp);
     try {
+      // Check humidity levels
       if (humidity < 30.0 || humidity > 60.0) {
         if (humidity < 30.0) {
+          // Humidity is too low for ideal sleep, suggest using a humidifier
           sleepSuggestions.add('Humidity levels too low for ideal sleep. Consider using a humidifier.');
         } else {
+          // Humidity is too high for ideal sleep, suggest opening a window or using a dehumidifier
           sleepSuggestions.add('Humidity levels too high for ideal sleep. Consider opening a window or using a dehumidifier.');
         }
       }
 
-      if (light > 30.0){
+      // Check light levels
+      if (light > 30.0) {
+        // Light levels are too high for ideal sleep, suggest removing any light sources
         sleepSuggestions.add('Light levels too high for ideal sleep. Consider removing any light sources.');
       }
 
+      // Check ambient light levels
       if (ambientLight > 200.0) {
+        // Ambient light levels are too high for ideal sleep, suggest removing any light sources
         sleepSuggestions.add('Ambient light levels too high for ideal sleep. Consider removing any light sources.');
       }
 
+      // Check temperature levels
       if (temp <= 60.0 || temp >= 75.0) {
-        if(temp <= 60.0){
+        if (temp <= 60.0) {
+          // Temperature levels are too low for ideal sleep, suggest raising the temperature
           sleepSuggestions.add('Temperature levels too low for ideal sleep. Consider raising the temperature.');
-        }else{
+        } else {
+          // Temperature levels are too high for ideal sleep, suggest lowering the temperature
           sleepSuggestions.add('Temperature levels too high for ideal sleep. Consider lowering the temperature.');
         }
       }
 
+      // Check total sleep time
       if (totalTime.isNotEmpty) {
         int sleepTime = int.parse(totalTime.split(' ')[0]);
         if (sleepTime < 7) {
+          // Suggest getting more sleep if sleep time is less than 7 hours
           sleepSuggestions.add('You may need more sleep. Aim for at least 7 hours.');
         } else if (sleepTime > 12) {
+          // Suggest reducing total sleep time if sleep time is more than 12 hours
           sleepSuggestions.add('You may be oversleeping. Consider reducing your total sleep time.');
         }
       }
     } catch (e) {
+      // Handle any errors that occur during parsing
       print('Error parsing total time: $e');
     }
 
-    setState(() {
-      // Update the state with the sleep suggestions
-    });
   }
+
 
   @override
   void initState() {
