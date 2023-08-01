@@ -66,46 +66,63 @@ class _CommunityPageState extends State<CommunityPage> {
     super.dispose();
   }
 
-  //Functionm to submit a post to firebase
+  // Function to submit a post to Firebase
   Future<void> _submitPost() async {
-    final profanityFilter = ProfanityFilter(); // Create an instance of the profanity filter
+    // Create an instance of the profanity filter
+    final profanityFilter = ProfanityFilter();
 
+    // Check if the post text is not empty and does not contain profanity
     if (_postController.text.trim() != "" && !profanityFilter.hasProfanity(_postController.text.trim())) {
+
+      // Get the current user from FirebaseAuth
       final user = FirebaseAuth.instance.currentUser;
+
+      // Proceed if the user is authenticated
       if (user != null) {
+        // Get the current date and time as milliseconds since epoch
         final DateTime now = DateTime.now();
         final int timestamp = now.millisecondsSinceEpoch ~/ 1000;
+
+        // Generate a unique post key based on user ID and timestamp
         final String postKey = '${user.uid}-$timestamp';
 
+        // Get the user data from the Firebase Realtime Database
         final DatabaseReference userRef = FirebaseDatabase.instance.reference().child('users').child(user.uid);
         final DataSnapshot userSnapshot = await userRef.get();
         final Map<dynamic, dynamic>? userData = userSnapshot.value as Map<dynamic, dynamic>?;
 
+        // Get the username and avatarURL from the user data, use 'anonymous' if not available
         final username = userData?['username'] as String? ?? 'anonymous';
         final avatarURL = userData?['avatarURL'] as String? ?? 'assets/profile_pictures/avatar1.png';
 
+        // Create a post object with necessary data
         final post = {
-          'postKey': postKey,
-          'username': username,
-          'avatarURL': avatarURL,
-          'timestamp': timestamp.toString(),
-          'text': _postController.text.trim(),
-          'likes': 0,
-          'likedBy': [], // Initialize likedBy as an empty list
+          'postKey': postKey,             // Unique key for the post
+          'username': username,           // Username of the author
+          'avatarURL': avatarURL,         // URL of the author's avatar
+          'timestamp': timestamp.toString(), // Timestamp of the post creation
+          'text': _postController.text.trim(), // Text content of the post
+          'likes': 0,                     // Initial number of likes (set to zero)
+          'likedBy': [],                  // Initialize likedBy as an empty list
         };
 
+        // Insert the post at the beginning of the posts list
         setState(() {
           _posts.insert(0, post);
         });
 
+        // Get a reference to the post location in the Firebase Realtime Database
         final DatabaseReference postRef = _postsRef.child(postKey);
+
+        // Save the post data to the Firebase Realtime Database
         await postRef.set(post);
 
+        // Clear the post input field after successful submission
         _postController.clear();
       }
     }
   }
-
+  
   //Function to like a post
   Future<void> _likePost(String postKey) async {
     final DatabaseReference postRef = _postsRef.child(postKey);
@@ -214,6 +231,7 @@ class _CommunityPageState extends State<CommunityPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFFCFB1B0),
         automaticallyImplyLeading: false,
         title: const Text(
           'Community',

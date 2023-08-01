@@ -38,7 +38,8 @@ class _ProfilePageState extends State<ProfilePage> {
     _auth = FirebaseAuth.instance;
     final user = _auth.currentUser;
     if (user != null) {
-      DatabaseReference userReference = databaseReference.child('users').child(user.uid);
+      DatabaseReference userReference =
+          databaseReference.child('users').child(user.uid);
       userReference.onValue.listen((event) {
         final dataSnapshot = event.snapshot;
         final userData = dataSnapshot.value as Map<dynamic, dynamic>?;
@@ -49,7 +50,8 @@ class _ProfilePageState extends State<ProfilePage> {
             deviceName = userData['deviceName'] as String?;
             units = userData['units'] as String?;
             selectedAvatar = userData['selectedAvatar'] as int? ?? 1;
-            avatarURL = userData['avatarURL'] as String? ?? 'assets/profile_pictures/avatar1.png';
+            avatarURL = userData['avatarURL'] as String? ??
+                'assets/profile_pictures/avatar1.png';
             _usernameController.text = username ?? '';
             _deviceNameController.text = deviceName ?? '';
           });
@@ -84,7 +86,8 @@ class _ProfilePageState extends State<ProfilePage> {
             spacing: 10,
             children: List.generate(6, (index) {
               final avatarNumber = index + 1;
-              final avatarImagePath = 'assets/profile_pictures/avatar$avatarNumber.png';
+              final avatarImagePath =
+                  'assets/profile_pictures/avatar$avatarNumber.png';
               return GestureDetector(
                 onTap: () {
                   selectAvatar(avatarNumber);
@@ -93,7 +96,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: CircleAvatar(
                   backgroundImage: AssetImage(avatarImagePath),
                   radius: 25,
-                  backgroundColor: selectedAvatar == avatarNumber ? Colors.blue : Colors.transparent,
+                  backgroundColor: selectedAvatar == avatarNumber
+                      ? Colors.blue
+                      : Colors.transparent,
                 ),
               );
             }),
@@ -104,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void selectAvatar(int avatarNumber) {
-    if (avatarNumber >= 1&& avatarNumber <= 6) {
+    if (avatarNumber >= 1 && avatarNumber <= 6) {
       setState(() {
         selectedAvatar = avatarNumber;
         avatarURL = 'assets/profile_pictures/avatar$avatarNumber.png';
@@ -116,6 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFFCFB1B0),
         automaticallyImplyLeading: false,
         title: const Text(
           'Profile',
@@ -188,7 +194,15 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: () {
                 saveUserData();
               },
-              child: Text('Save'),
+              child: Text(
+                'Save',
+                style: TextStyle(
+                  color: Colors.white, // Setting the text color of the button
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFCFB1B0),
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -202,7 +216,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 );
               },
-              child: Text('Logout'),
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                  color: Colors.white, // Setting the text color of the button
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFCFB1B0),
+              ),
             ),
           ],
         ),

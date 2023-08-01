@@ -236,6 +236,7 @@ class _LogPageState extends State<LogPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFFCFB1B0),
         automaticallyImplyLeading: false, // Disable the back arrow
         title: const Text(
           'Log',

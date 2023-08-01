@@ -275,6 +275,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFFCFB1B0),
         automaticallyImplyLeading: false, // Disable the back arrow
         title: const Text(
           'Home',
